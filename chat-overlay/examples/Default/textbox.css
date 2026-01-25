@@ -1,0 +1,71 @@
+/* move textbox to side */
+#chat li {
+    --comment : "select below";
+    /* float:  left; */
+    /* float: right; */
+}
+
+/* limit max width of textbox */
+#chat li {
+    max-width: 800px;
+}
+
+/* limit min width of textbox */
+#chat li {
+    min-width: 300px;
+}
+
+/* add animation like this */
+#chat li.post_load_animation {
+    animation-name: slight_wiggle;
+    animation-duration: 10s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+/* simlpe sway animation @NadirRift */
+@keyframes slight_wiggle {
+    0%      {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+
+    12.5%   {   transform: rotate(0.5deg) ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+
+    25%     {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+
+    37.5%   {   transform: rotate(-0.5deg);
+                transform-origin: 50% calc(0% - 250px);
+            }
+
+    50%     {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+
+    62.5%   {   transform: rotate(0.5deg) ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+
+    75%     {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+
+    87.5%   {   transform: rotate(-0.5deg);
+                transform-origin: 50% calc(0% - 250px);
+            }
+
+    100%    {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+}
+
+/* flip chat direction, kinda buggy */
+/* 
+#chat {
+    height: 150%;
+    top : 0%;
+    flex-direction: column;
+}
+*/

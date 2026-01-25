@@ -1,0 +1,89 @@
+/* move textbox to side */
+#chat li {
+    --comment : "select below";
+    /* float:  left; */
+    /* float: right; */
+}
+
+/* limit max width of textbox */
+#chat li {
+    max-width: 800px;
+}
+
+/* limit min width of textbox */
+#chat li {
+    min-width: 300px;
+}
+
+#chat li.post_load_animation {
+    animation-name: slight_wiggle;
+    animation-duration: 10s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes slight_wiggle {
+    0%      {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    12.5%   {   transform: rotate(0.5deg) ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    25%     {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    37.5%   {   transform: rotate(-0.5deg);
+                transform-origin: 50% calc(0% - 250px);
+            }
+    50%     {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    62.5%   {   transform: rotate(0.5deg) ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    75%     {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    87.5%   {   transform: rotate(-0.5deg);
+                transform-origin: 50% calc(0% - 250px);
+            }
+    100%    {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+}
+
+/* flip chat direction, kinda buggy */
+/* 
+#chat {
+    height: 150%;
+    top : 0%;
+    flex-direction: column;
+}
+*/
+
+
+span.username {
+    /* change your username text size here */
+    font-size: 200%;
+}
+
+.chat-badge {
+    /*change this number  V   */
+    width: calc( (18px * (2 - 1)) + 2px ); 
+    height: calc((18px * (2 - 1)) + 2px );
+    /* whatever you put in the one times
+    it here as a number so 250% becomes 2.5 etc */
+}
+
+#chat blockquote > span {
+    /* change your message text size here */
+    font-size: 100%;
+}
+
+#chat blockquote > img {
+  /*change this number  V */
+    width : calc(18px * 1);
+    height: calc(18px * 1);
+    /* whatever you put in the one times
+    it here as a number so 150% becomes 1.5 etc */
+}

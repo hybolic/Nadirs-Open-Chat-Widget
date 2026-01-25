@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- default styling of page elements -->
+    <link rel="stylesheet" href="./css/style.css">
+    <!-- user defined styling of textboxes and other elements -->
+    <link rel="stylesheet" href="./textbox.css">
+    <!-- used to interface with twitch chat -->
+    <!-- see https://github.com/instafluff/ComfyJS for details -->
+    <script src="https://cdn.jsdelivr.net/npm/comfy.js@latest/dist/comfy.min.js"></script>
+    <!-- contains user settings related to chat widget -->
+    <script src="./settings.js"></script>
+    <!-- the main javascript application -->
+    <script src="./js/chat.js"></script>
+    <!-- used to debug and visually test the chat offline -->
+    <script src="./js/debug.js"></script>
+</head>
+<body>
+    <!-- cache of images used to get widths and heights post load -->
+    <div class="image_cache"></div>
+    <div id="chat">
+        <ul>
+            <!-- keeps animations from breaking -->
+            <li id="KEEP_AT_BOTTOM" style="width:0px;height:0px;padding:0rem 0px"></li>
+        </ul>
+    </div>
+</body>
+</html>

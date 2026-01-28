@@ -89,7 +89,7 @@ if not (sys.prefix != (getattr(sys, "base_prefix", None) or getattr(sys, "real_p
     del shutil
     
     #open a %CWD%\\%virtual_dir%\\Scripts\\activate_this.py as a TextIOWrapper
-    with open(os.path.abspath(os.path.dirname(sys.argv[0])) + "\\"+virtual_dir+"\\Scripts\\activate_this.py") as f:
+    with open(os.path.abspath(".\\"+virtual_dir+"\\Scripts\\activate_this.py")) as f:
         # read file and compile the code for exec and execute it in script
         exec(compile(f.read(), activator, 'exec'), dict(__file__=activator))
     #check if we are now in a virtual enviroment!

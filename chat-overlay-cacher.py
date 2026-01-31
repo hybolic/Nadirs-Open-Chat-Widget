@@ -272,8 +272,6 @@ class MainWindow(QMainWindow):
         self.centralwidget.setSizePolicy(sizePolicy1)
         self.setCentralWidget(self.centralwidget)
         
-        
-        
         self.LogginScrollArea = QScrollArea(self.centralwidget)
         self.LogginScrollArea.setGeometry(QRect(0, 0, 771, 164))
         self.LogginScrollArea.setFrameShape(QFrame.Shape.HLine)
@@ -303,7 +301,7 @@ class MainWindow(QMainWindow):
         self.EMOTE_LIST = []
         
         self.EmoteScrollArea = QScrollArea(self.centralwidget)
-        self.EmoteScrollArea.setGeometry(QRect(0, 160, 771, 400))
+        self.EmoteScrollArea.setGeometry(QRect(0, 160, 771, 300))
         self.EmoteScrollArea.setFrameShape(QFrame.Shape.HLine)
         self.EmoteScrollArea.setFrameShadow(QFrame.Shadow.Plain)
         self.EmoteScrollArea.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
@@ -318,6 +316,20 @@ class MainWindow(QMainWindow):
         self.horizontalLayout = Widgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         
+        self.LARGE_IMAGE = QLabel(self.centralwidget)
+        self.LARGE_IMAGE.setGeometry(QRect(6, 600-118, 112, 112))
+        self.LARGE_IMAGE.setMinimumSize(112, 112)
+        self.LARGE_IMAGE.mv = QMovie("./emotes/notevi3Dispare-l")
+        self.LARGE_IMAGE.setMovie(self.LARGE_IMAGE.mv)
+        self.LARGE_IMAGE.mv.start()
+        self.LARGE_IMAGE.hide()
+        
+        self.LARGE_IMAGE_NAME = QLabel(self.centralwidget)
+        self.LARGE_IMAGE_NAME.setGeometry(QRect(6, 600-148, 112, 20))
+        self.LARGE_IMAGE_NAME.setMinimumSize(112, 20)
+        self.LARGE_IMAGE_NAME.setText("THIS IS A TEST")
+        self.LARGE_IMAGE_NAME.hide()
+        
         # # SET COLOR TEST
         # palette = self.horizontalLayoutWidget.palette()
         # palette.setBrush(QPalette.ColorRole.Window, QColor("Red"))
@@ -325,7 +337,6 @@ class MainWindow(QMainWindow):
         # self.horizontalLayoutWidget.setPalette(palette)
         
         self.EmoteScrollArea.setWidget(self.scrollAreaWidgetContents)
-        
         
         self.timer = QTimer()
         self.timer.timeout.connect(self.checkTimer)
@@ -335,7 +346,7 @@ class MainWindow(QMainWindow):
             if file.endswith("-s"):
                 self.addEmote("./emotes/" + file)
     
-    def addEmote(self, path):
+    def addEmote(self, path:str):
         global print_data
         if self.EMOTE_LIST.__contains__(path) or self.EMOTE_LIST.__len__() > 100:
             return
@@ -345,16 +356,22 @@ class MainWindow(QMainWindow):
         pixel_width = 28
         padding     = 1
         size        = round(self.horizontalLayoutWidget.geometry().width()/(pixel_width + (padding * 2))) - 1
-        new_pic     = Widgets.QLabel(self.horizontalLayoutWidget)
+        new_pic:QLabel     = QLabel(self.horizontalLayoutWidget)
         
-        mv = QMovie(path)
+        mv:QMovie = QMovie(path)
         new_pic.setMovie(mv)
         mv.start()
             
         new_pic.setFixedSize(pixel_width, pixel_width)
-        # new_pic.setGeometry(QRect(0, 0, pixel_width, pixel_width))
-        new_pic .setMinimumSize(pixel_width, pixel_width)
+        name = re.sub("-l|-m|-s|-xl", "", re.sub("\.\/emotes\/", "", path))
+        new_pic.setToolTip(name)
+        new_pic.setMinimumSize(pixel_width, pixel_width)
         self.pictureText.append(new_pic)
+        
+        new_pic.enterEvent_old = new_pic.enterEvent
+        new_pic.leaveEvent_old = new_pic.leaveEvent
+        new_pic.enterEvent = lambda event : self.hoverOverEmote(path, name, True)
+        new_pic.leaveEvent = lambda event : self.hoverOverEmote(path, name, False)
         
         x = round((self.pictureText.__len__()-1) % (size))
         y = round(((self.pictureText.__len__()-1) / size) - (x / size))
@@ -367,7 +384,19 @@ class MainWindow(QMainWindow):
         self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, pixel_width * size,(y+1) * pixel_width))
         self.horizontalLayoutWidget  .setMinimumSize(self.horizontalLayoutWidget.minimumWidth(),(y+1) * pixel_width)
         self.scrollAreaWidgetContents.setMinimumSize(self.scrollAreaWidgetContents.minimumWidth(),(y+1) * pixel_width)
-    
+        
+    def hoverOverEmote(self, path, emotename, hovering):
+        if hovering and self.LARGE_IMAGE.isHidden():
+            self.LARGE_IMAGE.mv.stop()
+            self.LARGE_IMAGE.mv.setFileName(re.sub("-[smx][l]*","-l",path))
+            self.LARGE_IMAGE.mv.start()
+            self.LARGE_IMAGE_NAME.setText(emotename)
+            self.LARGE_IMAGE.show()
+            self.LARGE_IMAGE_NAME.show()
+        elif not hovering and not self.LARGE_IMAGE.isHidden():
+            self.LARGE_IMAGE.hide()
+            self.LARGE_IMAGE_NAME.hide()
+            
     def appendText(self, text):
         dat:str = (self.textEdit.text() + "\n" + text)
         
@@ -392,7 +421,6 @@ class MainWindow(QMainWindow):
         self.textEdit.setMinimumSize(text_pixelW, text_pixelH)
         self.LogginscrollAreaWidgetContents.setMinimumSize(text_pixelW, text_pixelH)
     
-        
     def checkTimer(self):
         global print_data
         global has_emotes
@@ -410,7 +438,7 @@ class MainWindow(QMainWindow):
                     if not (string in (None, '')) or string.strip():
                         self.appendText(string)
                 print_data = ""
-
+                
 #Define Window Gui        
 Window:MainWindow = None
 app = QApplication(sys.argv)

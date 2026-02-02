@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", async function (event) {
 
     //#region // load image cache
     LoadImageCache()
+    if (typeof settings.PostImageLoad == "function") settings.PostImageLoad(ImageCache, REF)
 
     console.log("Chat openned for " + twitchName)
     console.log("Max Messages On Screen " + messageHoldLength)
@@ -192,6 +193,7 @@ function Message(user, message, flags, extra) {
 
     //#region // Set Username Offsets 
     /* #region Set Username Offsets */
+    StyleSheet.UserName
     if (typeof settings.text_box[variant].username_offset.Left != "undefined") {
         if (settings.text_box[variant].username_offset.Left.match(/CENTER/i)) {
             TITLE.style.display = "flex"
@@ -363,6 +365,10 @@ function Message(user, message, flags, extra) {
 
     //#region //appened offsets
     //add username to the offset
+    if (typeof settings.PreAppenedChildUserName == "function")
+        settings.PreAppenedChildUserName(variant, REF, UserName, Badges_OFFSET)
+    console.log(Badges_OFFSET.style.left)
+    console.log(Badges_OFFSET.style.top)
     UserName_OFFSET.appendChild(UserName);
 
     //add username to the title element
@@ -474,6 +480,8 @@ function Message(user, message, flags, extra) {
             }
         }
 }
+
+
 //#region func makeBadge(...)
 /**
  * @param {string} type 
@@ -499,6 +507,8 @@ function makeBadge(type, age = -1) {
         badge.src = current_badge.x1
         badge.srcset = current_badge.x1 + " 1x, " + current_badge.x2 + " 2x, " + current_badge.x4 + " 4x"
     }
+    badge.type = type
+    badge.age  = age
     return badge
 }
 //#region func makeTextBox(...)

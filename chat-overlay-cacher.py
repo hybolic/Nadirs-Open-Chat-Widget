@@ -201,7 +201,7 @@ class ServOG(BaseHTTPRequestHandler):
         if self.path == '/' or self.path == "/debug":
             self.path = '/chat.html'
             self.send_response(301)
-            self.send_header('Location','http://localhost:' + str(httpd.server_address[1]) + '/chat.html?DEBUG=5&spam_msg=30&spam_speed=500,800,400,1000')
+            self.send_header('Location','http://localhost:' + str(httpd.server_address[1]) + '/chat.html?DEBUG=50&spam_msg=30&spam_speed=500,800,400,1000')
             
         elif self.path.startswith("/get_emote"):
             ServOG.getEmote(self)
@@ -211,7 +211,34 @@ class ServOG(BaseHTTPRequestHandler):
             MIME = get_mime_from_filedata(self.path[1:])
             self.send_response(200)
             self.send_header('Content-type', MIME)
-            
+        # some magic stuff that allows us to pull from directories that aren't part of this structure only
+        # when using exmaples
+        elif self.path[:11].startswith("/examples/"):
+            try:
+                curfil = open(self.path[1:])
+                MIME = get_mime_from_extension(self.path)
+                if not (MIME is None):
+                    self.send_response(200)
+                    if MIME.__contains__("image"):
+                        curfil.close()
+                        curfil = open(self.path[1:], 'rb')
+                    self.send_header('Content-type', MIME)
+                file_to_open = curfil.read()
+            except:
+                try:
+                    redir_path = re.sub("\/examples\/[^\/]+\/","/",self.path)
+                    curfil = open(redir_path[1:])
+                    MIME = get_mime_from_extension(redir_path)
+                    if not (MIME is None):
+                        self.send_response(200)
+                        if MIME.__contains__("image"):
+                            curfil.close()
+                            curfil = open(redir_path[1:], 'rb')
+                        self.send_header('Content-type', MIME)
+                    file_to_open = curfil.read()
+                except:
+                    file_to_open = "File not found"
+                    self.send_response(404)
         else:
             try:
                 curfil = open(self.path[1:])

@@ -1,0 +1,165 @@
+.username_namebox > #background
+{
+    position: absolute;
+    z-index:-1;
+    display: flex;
+}
+
+#chat blockquote 
+{
+    min-height: 30px;
+    z-index: 1;
+}
+
+#chat li
+{
+    min-height: 30px;
+}
+
+#chat blockquote > span {
+    color: #b71ffd;
+    /* change your message text size here */
+    font-size: 200%;
+}
+
+#chat blockquote > img {
+    bottom     : calc(-3px * 2);
+    width      : calc(18px * 2); /* whatever you put in the one times it here as a number so 150% becomes 1.5 etc */
+    height     : calc(18px * 2);
+}
+
+
+#bg_corner_tl
+{
+    animation-name: slight_wiggle2;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+#bg_corner_bl
+{
+    animation-name: slight_wiggle1;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+#bg_corner_tr
+{
+    animation-name: slight_wiggle2;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+#bg_corner_br
+{
+    animation-name: slight_wiggle1;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+#chat li.post_load_animation {
+    animation-name: slight_wiggle;
+    animation-duration: 10s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+#chat li {
+    margin-bottom: 40px;
+}
+
+@keyframes slight_wiggle {
+    0%      {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    12.5%   {   transform: rotate(0.5deg) ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    25%     {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    37.5%   {   transform: rotate(-0.5deg);
+                transform-origin: 50% calc(0% - 250px);
+            }
+    50%     {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    62.5%   {   transform: rotate(0.5deg) ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    75%     {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    87.5%   {   transform: rotate(-0.5deg);
+                transform-origin: 50% calc(0% - 250px);
+            }
+    100%    {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+}
+
+
+@keyframes slight_wiggle1 {
+    0%      {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    12.5%   {   transform: rotate(-0.5deg);
+                transform-origin: 50% calc(0% - 250px);
+            }
+    25%     {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    37.5%   {   transform: rotate(0.5deg) ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    50%     {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    62.5%   {   transform: rotate(-0.5deg);
+                transform-origin: 50% calc(0% - 250px);
+            }
+    75%     {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    87.5%   {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    100%    {   transform: rotate(0.5deg) ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+}
+
+
+@keyframes slight_wiggle2 {
+    0%      {   transform: rotate(0.5deg) ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    12.5%   {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    25%     {   transform: rotate(-0.5deg);
+                transform-origin: 50% calc(0% - 250px);
+            }
+    37.5%   {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    50%     {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    62.5%   {   transform: rotate(0.5deg) ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    75%     {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+    87.5%   {   transform: rotate(-0.5deg);
+                transform-origin: 50% calc(0% - 250px);
+            }
+    100%    {   transform: rotate(0deg)   ;
+                transform-origin: 50% calc(0% - 250px);
+            }
+}

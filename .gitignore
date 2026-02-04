@@ -10,3 +10,6 @@ chat-overlay/examples/*/badges/months/*/badge.png
 /Scripts
 pyvenv.cfg
 /NadirStreamOverlay
+# due to security concerns the dev shortcut for chrome will be removed
+/GoalTracker/Dev.ink
+GoalTracker/Dev.lnk

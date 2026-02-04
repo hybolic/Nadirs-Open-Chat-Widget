@@ -1,0 +1,91 @@
+body {
+    background-color: rgba(0, 0, 0, 0);
+    margin: 0px auto;
+    overflow: hidden;
+}
+
+img {
+    position: absolute;
+    width: 2445px;
+    height: 2445px;
+}
+
+/* EVERYTHING IS ABSOLUTE! */
+* {
+    position: absolute;
+}
+div.vial_fluid_masked {
+    width              : 2445px;
+    height             : 2445px;
+    -webkit-mask-image : url("./masks/vial_mask_1.png");
+    mask-image         : image(url("./masks/vial_mask_1.png"));
+    /* mask:url(#mask); */
+    mask-size          : 100% 100%;
+    /* mask-mode: luminance; */
+    mask-mode          : alpha;
+}
+
+div.vial_fluid_masked > * {
+    width  : 100%;
+    height : 100%;
+    bottom: 0px;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    background-size: cover;
+    background-repeat: round;
+}
+
+div.vial_fluid_masked > #true_level
+{
+    height : 1700px;
+    background-color: green;
+    visibility: hidden;
+}
+div.vial_fluid_masked > * {
+    /* 0 = 0.8 ---- 1 = 0.0 */
+    bottom:calc(-1700px * 0.8);
+}
+
+div#goal_level.left {
+    height : 1700px;
+    animation-name: move_left;
+    animation-duration: 5s;
+    background-image: url("./image/vial_fluid_left.png");
+}
+
+div#goal_level.right {
+    height : 1700px;
+    animation-name: move_right;
+    animation-duration: 15s;
+    background-image: url("./image/vial_fluid_right.png");
+}
+
+#animation_layer
+{
+    --comment:"set animations here";
+}
+
+
+@keyframes move_left {
+  from
+  {
+    background-position: 0 0;
+  }
+  to
+  {
+    background-position: 2445px 0;
+  }
+}
+
+@keyframes move_right {
+  from
+  {
+    background-position: 0 0;
+  }
+  to
+  {
+    background-position: -2445px 0;
+  }
+}
+
+/* declare animations down here */

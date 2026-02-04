@@ -1,0 +1,23 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <!-- default styling of page elements -->
+    <link rel="stylesheet" href="./style.css">
+    <!-- Settings and number for goal level is done here -->
+    <script src="./settings.js"></script>
+    <!-- goal stuff is set down here -->
+    <script src="./scripts/goal.js"></script>
+</head>
+<body>
+    <div id="animation_layer">
+        <img src="./image/vial_forground.png" style="z-index: 1;">
+        <div class="vial_fluid_masked">
+            <img id="true_level" src="./image/vial_fluid.png" >
+            <div id="goal_level" class="left" ></div>
+            <div id="goal_level" class="right"></div>
+            <!-- <div id="goal_level" class="bubbles_mask">
+                <div class="bubbles"></div>
+            </div> -->
+        </div>
+        <img src="./image/vial_background.png" style="z-index: -1;">
+    </div>
+</body></html>
